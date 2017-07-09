@@ -18,22 +18,17 @@ module.exports = {
     idle: process.env.SEQ_POOL_IDLE || 30000
   },
 
-  rand: function() {
+  rand() {
     return parseInt(Math.random() * 999, 10);
   },
 
   mssql: mssqlConfig || {
-    database: process.env.SEQ_MSSQL_DB   || process.env.SEQ_DB   || (function () {
-      var db = 'sequelize-test-' + ~~(Math.random() * 100);
-      console.log('Using database: ', db);
-      return db;
-    }()),
+    database: process.env.SEQ_MSSQL_DB   || process.env.SEQ_DB   || 'sequelize_test',
     username: process.env.SEQ_MSSQL_USER || process.env.SEQ_USER || 'sequelize',
     password: process.env.SEQ_MSSQL_PW   || process.env.SEQ_PW   || 'nEGkLma26gXVHFUAHJxcmsrK',
     host:     process.env.SEQ_MSSQL_HOST || process.env.SEQ_HOST || 'mssql.sequelizejs.com',
     port:     process.env.SEQ_MSSQL_PORT || process.env.SEQ_PORT || 1433,
     dialectOptions: {
-      instanceName:  process.env.MSSQL_INSTANCE ? process.env.MSSQL_INSTANCE : 'SQLEXPRESS',
       // big insert queries need a while
       requestTimeout: 60000
     },
